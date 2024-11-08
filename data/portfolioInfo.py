@@ -1,3 +1,9 @@
+"""
+portfolioInfo.py
+--------
+Defines stock ticker constants
+"""
+
 # Technology Companies
 TECHNOLOGY_COMPANIES = [
     'AMD', 'IBM', 'CRM', 'HPE', 'DELL', 'ADBE', 'AI', 'SHOP', 'TWLO', 'SPOT', 'Z',

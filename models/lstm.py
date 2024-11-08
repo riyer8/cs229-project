@@ -63,7 +63,7 @@ import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-from data.historicalVolData import historical_volatility  # Ensure this returns a DataFrame
+from data.historicalVolData import generate_ticker_vol
 
 # Parameters
 START_DATE = '2013-01-01'
@@ -76,7 +76,7 @@ EPOCHS = 20
 # DEVICE = 'cuda' if torch.cuda.is_available() else 'cpu'
 DEVICE = 'cpu'
 # Step 1: Load Data and Calculate Volatility
-data = historical_volatility(TICKER, START_DATE, END_DATE)
+data = generate_ticker_vol(TICKER, START_DATE, END_DATE)
 data.dropna(inplace=True)  # Drop NaNs resulting from rolling calculations
 
 # Prepare features and target
