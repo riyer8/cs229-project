@@ -1,5 +1,5 @@
 """
-historicalVolData.py
+vol_loader.py
 -------------------
 Utility functions to save and load ticker volatility data, as well as plot the historical volatility for a single stock ticker
 
@@ -14,19 +14,20 @@ import pandas as pd
 import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
-from portfolioInfo import ALL_TICKERS
+from data.ticker_settings import ALL_TICKERS
 
 
 # constants
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S%z"
 WINDOW_DAYS = 100  # smoothness factor
-START_DATE = '2013-01-01'
+START_DATE = '2003-01-01'
 END_DATE = '2023-12-31'
-DATA_DIR = "datasets"
+DATA_DIR_LOAD = "data/datasets"  # full path when reading from outside directory
+DATA_DIR_SAVE = "datasets"
 
 
 def load_ticker_data(ticker) -> pd.DataFrame:
-    file_path = os.path.join(DATA_DIR, f"{ticker}_volatility.csv")
+    file_path = os.path.join(DATA_DIR_LOAD, f"{ticker}_volatility.csv")
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"No data file found for {ticker}. Please generate it first.")
     data = pd.read_csv(file_path, index_col=0, parse_dates=True)
@@ -38,8 +39,11 @@ def generate_ticker_vol(ticker, start_date, end_date) -> None:
     data = yf.download(ticker, start=start_date, end=end_date)
     data['Daily Return'] = data['Adj Close'].pct_change()
     data['Volatility'] = data['Daily Return'].rolling(window=WINDOW_DAYS).std() * np.sqrt(252) * 100
+    data.reset_index(inplace=True)
+    data['Date'] = pd.to_datetime(data['Date']).dt.tz_localize(None)
+    data.dropna(inplace=True)
     print(data.head())
-    file_path = os.path.join(DATA_DIR, f"{ticker}_volatility.csv")
+    file_path = os.path.join(DATA_DIR_SAVE, f"{ticker}_volatility.csv")
     data.to_csv(file_path)
     print(f"Data saved to {file_path}")
 
@@ -57,11 +61,9 @@ def plot_historical_volatility(ticker):
 
 
 def download_data():
-    for ticker in ALL_TICKERS[:1]:
+    for ticker in ALL_TICKERS:
         generate_ticker_vol(ticker, START_DATE, END_DATE)
 
 
 if __name__ == '__main__':
     download_data()
-    # data = load_ticker_data("AAPL")
-    # print(data.head())

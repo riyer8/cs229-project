@@ -1,5 +1,5 @@
 """
-portfolioInfo.py
+ticker_settings.py
 --------
 Defines stock ticker constants
 """

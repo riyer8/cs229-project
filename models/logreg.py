@@ -1,8 +1,8 @@
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
-from data import ALL_TICKERS
-from data.historicalVolData import generate_ticker_vol, plot_historical_volatility
+from data.ticker_settings import ALL_TICKERS
+from data.vol_loader import generate_ticker_vol, plot_historical_volatility
 
 # Parameters
 START_DATE = '2013-01-01'
@@ -10,7 +10,7 @@ END_DATE = '2023-12-31'
 TICKER = ALL_TICKERS[0]  # Adjust as needed
 ENABLE_PLOTTING = False  # Set to True if you want to plot volatility
 
-# Load Data and Calculate Volatility using historicalVolData.py
+# Load Data and Calculate Volatility using vol_loader.py
 data = generate_ticker_vol(TICKER, START_DATE, END_DATE)
 
 # Classify High vs. Low Volatility
