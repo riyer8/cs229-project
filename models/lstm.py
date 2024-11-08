@@ -5,7 +5,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
 from tensorflow.keras.preprocessing.sequence import TimeseriesGenerator
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-from historicalVolData import historical_volatility  # Make sure this returns a DataFrame
+from data.historicalVolData import historical_volatility  # Make sure this returns a DataFrame
 
 # Parameters
 START_DATE = '2013-01-01'
@@ -16,7 +16,7 @@ SEQUENCE_LENGTH = 30  # Number of previous days the LSTM will look at
 
 # Step 1: Load Data and Calculate Volatility
 data = historical_volatility(TICKER, START_DATE, END_DATE)
-
+print(data)
 # Drop NaNs resulting from rolling calculations
 data.dropna(inplace=True)
 
@@ -40,10 +40,10 @@ model.add(LSTM(50, activation='relu', input_shape=(SEQUENCE_LENGTH, X_train.shap
 model.add(Dense(1))  # Single output neuron with linear activation for regression
 
 model.compile(optimizer='adam', loss='mean_squared_error', metrics=['mae'])  # MSE loss for regression
-
+print("model compiled")
 # Step 4: Train the Model
 history = model.fit(train_gen, epochs=20, validation_data=test_gen)
-
+print("model fit")
 # Step 5: Evaluate the Model
 # Predictions for test set
 y_pred = model.predict(test_gen)

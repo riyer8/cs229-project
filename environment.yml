@@ -1,0 +1,13 @@
+name: cs229-stockvol
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - matplotlib
+  - numpy
+  - pip
+  - python==3.9.15 # downgrade for compatibility with tensorflow
+  - scikit-learn
+  - scipy
+  - yfinance
+  - tensorflow
