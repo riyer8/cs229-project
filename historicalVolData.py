@@ -1,3 +1,17 @@
+"""
+This script calculates and optionally plots the historical volatility for a single stock ticker 
+from a predefined list of tickers (`ALL_TICKERS`). The code specifically selects the first ticker 
+in the list (`ALL_TICKERS[0]`) and performs the following operations:
+
+1. Downloads historical stock price data from Yahoo Finance for the selected ticker.
+2. Calculates the daily returns and the 100-day rolling annualized volatility of the stock.
+3. If `ENABLE_PLOTTING` is set to True, it plots the calculated volatility over time.
+
+Note:
+- The script is currently set to process and plot data for only the first ticker in `ALL_TICKERS`.
+- To enable plotting, change `ENABLE_PLOTTING` to True.
+"""
+
 import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,13 +22,14 @@ WINDOW_DAYS = 100 # smoothness factor
 START_DATE = '2013-01-01'
 END_DATE = '2023-12-31'
 TICKER = ALL_TICKERS[0]
-ENABLE_PLOTTING = False
+ENABLE_PLOTTING = True
 
 def historical_volatility(ticker, start_date, end_date):
     data = yf.download(ticker, start=start_date, end=end_date)
     data['Daily Return'] = data['Adj Close'].pct_change()
     data['Volatility'] = data['Daily Return'].rolling(window=WINDOW_DAYS).std() * np.sqrt(252) * 100
-    
+    return data
+
 def plot_historical_volatility(ticker, start_date, end_date):
     data = yf.download(ticker, start=start_date, end=end_date)
     data['Daily Return'] = data['Adj Close'].pct_change()
