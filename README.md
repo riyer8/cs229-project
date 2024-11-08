@@ -11,4 +11,4 @@ conda env create -f environment.yml
 conda activate cs229-stockvol
 ```
 
-In VSCode: CMMD-Shift-p -> python:Select Interpreter
+In VS Code: `CMD-Shift-p`, then `python: Select Interpreter`

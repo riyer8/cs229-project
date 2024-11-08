@@ -6,8 +6,8 @@ dependencies:
   - matplotlib
   - numpy
   - pip
-  - python==3.9.15 # downgrade for compatibility with tensorflow
+  - python=3.9
   - scikit-learn
   - scipy
   - yfinance
-  - tensorflow
+  - pytorch

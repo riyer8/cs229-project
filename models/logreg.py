@@ -1,10 +1,8 @@
 import numpy as np
-import pandas as pd
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report
-from data.portfolioInfo import ALL_TICKERS
-from data.historicalVolData import historical_volatility, plot_historical_volatility
+from models.data.portfolioInfo import ALL_TICKERS
+from models.data.historicalVolData import historical_volatility, plot_historical_volatility
 
 # Parameters
 START_DATE = '2013-01-01'
