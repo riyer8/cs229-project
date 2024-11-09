@@ -1,147 +1,88 @@
-import pandas as pd
+"""
+run_garch_model.py
+-------------------
+Run GARCH model for time series volatility forecasting
+"""
 import numpy as np
+import pandas as pd
 from arch import arch_model
 from sklearn.metrics import mean_squared_error, mean_absolute_error
-from data import vol_loader
-import matplotlib.pyplot as plt
-
-
-SPLIT_SIZE = 0.7
-TICKER = 'AAPL'
-SPLIT_SIZE = 0.7
-SEQUENCE_LENGTH = 30
-BATCH_SIZE = 32
-EPOCHS = 20
-
-# Load your data
-data = vol_loader.load_ticker_data(TICKER)
-
-
-"""
-# Load your data
-data = vol_loader.load_ticker_data(TICKER)
-
-# Ensure data is sorted by date
-data.sort_values('Date', inplace=True)
-
-# Extract returns
-returns = data['Daily Return'].dropna() * 100  # Percentage returns
-
-data = vol_loader.load_ticker_data(TICKER)
-
-data.dropna(inplace=True)  # Drop NaNs resulting from rolling calculations
-
-features = data[['Daily Return']].values  # Use 'Daily Return' as input feature
-target = data['Volatility'].values  # Volatility as the continuous target
-dates = data['Date'].values
-# 2) train-test split including dates
-X_train, X_test, y_train, y_test, dates_train, dates_test = train_test_split(
-    features, target, dates, train_size=SPLIT_SIZE, shuffle=False
-)
-"""
-# Extract returns
-returns = data['Daily Return'].dropna() * 100  # Percentage returns
-
-# Split into train and test sets
-train_size = int(len(returns) * SPLIT_SIZE)
-train_returns = returns[:train_size]
-test_returns = returns[train_size:]
-
-# Fit GARCH(1,1) model on training data
-garch_model = arch_model(train_returns, vol='Garch', p=1, q=1, mean='Constant', rescale=False)
-garch_fit = garch_model.fit(disp='off')
-
-# Forecast volatility for test set
-garch_forecast = garch_fit.forecast(horizon=1, reindex=False)
-predicted_volatility_garch = garch_forecast.variance.values[-len(test_returns):].flatten()
-predicted_volatility_garch = np.sqrt(predicted_volatility_garch)  # Convert variance to standard deviation
-
-# Actual volatility
-actual_volatility = data['Volatility'][train_size + SEQUENCE_LENGTH:].values  # Adjust based on your sequence length
-
-# Evaluate GARCH performance
-mse_garch = mean_squared_error(actual_volatility, predicted_volatility_garch)
-mae_garch = mean_absolute_error(actual_volatility, predicted_volatility_garch)
-
-print(f"GARCH Model - MSE: {mse_garch}, MAE: {mae_garch}")
-
-def plot():
-    plt.figure(figsize=(15, 7))
-    plt.plot(dates_test, actual_volatility, label='Actual Volatility', color='black')
-    plt.plot(dates_test, predicted_volatility_garch, label='GARCH Predicted Volatility', color='red')
-    plt.xlabel('Date')
-    plt.ylabel('Volatility')
-    plt.title('GARCH Predicted vs Actual Volatility')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-
-"""
-import pandas as pd
-import numpy as np
-from arch import arch_model
-import matplotlib.pyplot as plt
-from sklearn.metrics import mean_squared_error, mean_absolute_error
-from data import vol_loader
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from data import vol_loader
 
-
-SPLIT_SIZE = 0.7
+# consts
 TICKER = 'AAPL'
 SPLIT_SIZE = 0.7
-SEQUENCE_LENGTH = 30
-BATCH_SIZE = 32
-EPOCHS = 20
 
-# Load your data
+###################### functionality
+
+# 1) Load data
 data = vol_loader.load_ticker_data(TICKER)
-
-# Ensure data is sorted by date
-data.sort_values('Date', inplace=True)
-
-# Extract returns
-returns = data['Daily Return'].dropna() * 100  # Percentage returns
-
-data = vol_loader.load_ticker_data(TICKER)
-
 data.dropna(inplace=True)  # Drop NaNs resulting from rolling calculations
 
-features = data[['Daily Return']].values  # Use 'Daily Return' as input feature
-target = data['Volatility'].values  # Volatility as the continuous target
-dates = data['Date'].values
-# 2) train-test split including dates
+# Check if 'Date' column exists; if not, use the index
+if 'Date' in data.columns:
+    data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
+else:
+    data['Date'] = data.index
+
+# Prepare target variable (Volatility)
+returns = data['Daily Return'].values  # Assuming 'Daily Return' is available
+
+# Rescale to improve convergence
+y_rescaled = 1000 * returns  
+
+# 2) Train-test split
 X_train, X_test, y_train, y_test, dates_train, dates_test = train_test_split(
-    features, target, dates, train_size=SPLIT_SIZE, shuffle=False
+    returns, y_rescaled, data['Date'].values, train_size=SPLIT_SIZE, shuffle=False
 )
 
-# Fit GARCH(1,1) model on training data
-garch_model = arch_model(X_train, vol='Garch', p=1, q=1, mean='Constant', rescale=False)
-garch_fit = garch_model.fit(disp='off')
+# 3) Fit GARCH model on training data
+model = arch_model(y_train, vol='Garch', p=1, q=1)
+garch_fit = model.fit(disp="off")
 
-# Forecast volatility for test set
-garch_forecast = garch_fit.forecast(horizon=1, reindex=False)
-predicted_volatility_garch = garch_forecast.variance.values[-len(X_test):].flatten()
-predicted_volatility_garch = np.sqrt(predicted_volatility_garch)  # Convert variance to standard deviation
+# Print the summary of the GARCH model for diagnostics
+print(garch_fit.summary())
 
-# Actual volatility
-actual_volatility = data['Volatility'][train_size + SEQUENCE_LENGTH:].values  # Adjust based on your sequence length
+# Check if the model fit was successful
+if garch_fit.convergence_flag == 0:
+    # 4) Generate predictions for the test set
+    pred_volatility = garch_fit.forecast(start=len(y_train), reindex=False)
 
-# Evaluate GARCH performance
-mse_garch = mean_squared_error(actual_volatility, predicted_volatility_garch)
-mae_garch = mean_absolute_error(actual_volatility, predicted_volatility_garch)
+    # Check if the forecast provides valid variance values
+    if pred_volatility.variance.shape[0] > 0 and np.any(pred_volatility.variance.values):
+        predicted_vol = np.sqrt(pred_volatility.variance.values[-1, :])  # Get predicted volatilities
+    else:
+        raise ValueError("Forecast failed: no valid variance values to predict.")
+else:
+    raise ValueError("Model fitting failed to converge.")
 
-print(f"GARCH Model - MSE: {mse_garch}, MAE: {mae_garch}")
+# 5) Evaluate the model
+mse = mean_squared_error(y_test, predicted_vol[:len(y_test)])
+mae = mean_absolute_error(y_test, predicted_vol[:len(y_test)])
 
-def plot():
+print("Mean Squared Error:", mse)
+print("Mean Absolute Error:", mae)
+
+# 6) Plot Predictions vs Actual
+def plot_preds(dates, actual, predicted):
     plt.figure(figsize=(15, 7))
-    plt.plot(dates_test, actual_volatility, label='Actual Volatility', color='black')
-    plt.plot(dates_test, predicted_volatility_garch, label='GARCH Predicted Volatility', color='red')
-    plt.plot(dates_test, y_pred_inverse, label='LSTM Predicted Volatility', color='blue')
-    plt.xlabel('Date')
-    plt.ylabel('Volatility')
-    plt.title('GARCH vs LSTM - Predicted vs Actual Volatility')
+    plt.plot(dates, actual, label="Actual Volatility", color='blue')
+    plt.plot(dates, predicted, label="Predicted Volatility", color='orange')
+    plt.xlabel("Date")
+    plt.ylabel("Volatility")
+    plt.title("GARCH Model - Predicted vs. Actual Volatility")
     plt.legend()
-    plt.grid(True)
+
+    # Improve date formatting on the x-axis
+    plt.gca().xaxis.set_major_locator(mdates.AutoDateLocator())
+    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    plt.gcf().autofmt_xdate()  # Rotate date labels for better readability
+
+    plt.tight_layout()
     plt.show()
 
-"""
+# Align the dates correctly for plotting
+plot_preds(dates_test[:len(predicted_vol)], y_test, predicted_vol[:len(y_test)])
