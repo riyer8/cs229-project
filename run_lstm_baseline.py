@@ -1,5 +1,5 @@
 """
-run_baseline.py
+run_lstm_baseline.py
 -------------------
 Run baseline LSTM model with date-aware plotting
 """
@@ -15,7 +15,6 @@ from data import vol_loader
 from models.lstm import LSTMRegressor
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import os
 
 # consts
 TICKER = 'AAPL'
