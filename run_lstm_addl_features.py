@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 # consts
-TICKER = 'AAPL'
+TICKER = 'DOW'
 SPLIT_SIZE = 0.7
 SEQUENCE_LENGTH = 30
 BATCH_SIZE = 32
