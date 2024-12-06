@@ -1,0 +1,3 @@
+MU Linear Regression Info
+R² Score: -0.15397628086955972
+MSE: 136.15998242440492

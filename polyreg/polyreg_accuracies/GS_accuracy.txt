@@ -1,0 +1,3 @@
+GS Polynomial Regression Info (Degree 2)
+R² Score: -0.142346422145756
+MSE: 36.31317157995103

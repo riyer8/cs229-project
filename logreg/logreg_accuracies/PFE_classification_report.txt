@@ -1,0 +1,11 @@
+PFE Logistic Regression Info
+Accuracy: 0.9913793103448276
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.98      1.00      0.99       442
+           1       1.00      0.98      0.99       370
+
+    accuracy                           0.99       812
+   macro avg       0.99      0.99      0.99       812
+weighted avg       0.99      0.99      0.99       812

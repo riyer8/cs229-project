@@ -1,0 +1,3 @@
+CVX Linear Regression Info
+R² Score: -0.3384229096846767
+MSE: 104.49667247454994

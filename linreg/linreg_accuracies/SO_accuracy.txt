@@ -1,0 +1,3 @@
+SO Linear Regression Info
+R² Score: -0.10837021858511786
+MSE: 28.513371237711038

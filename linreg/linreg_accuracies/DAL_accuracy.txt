@@ -1,0 +1,3 @@
+DAL Linear Regression Info
+R² Score: -0.11926924995104748
+MSE: 184.07656159934925

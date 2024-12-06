@@ -13,7 +13,7 @@ import pandas as pd
 import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
-from ticker_settings import ALL_TICKERS
+from .ticker_settings import ALL_TICKERS
 
 # Constants
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S%z"
@@ -23,7 +23,6 @@ END_DATE = '2020-12-31'
 DATA_DIR_LOAD = "data/datasets"  # full path when reading from outside directory
 DATA_DIR_SAVE = "datasets"
 
-
 def load_ticker_data(ticker) -> pd.DataFrame:
     file_path = os.path.join(DATA_DIR_LOAD, f"{ticker}_volatility.csv")
     if not os.path.exists(file_path):
@@ -32,11 +31,9 @@ def load_ticker_data(ticker) -> pd.DataFrame:
     print(f"Data for {ticker} loaded from {file_path}")
     return data
 
-
 def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     data = yf.download(ticker, start=start_date, end=end_date)
-    data.columns = data.columns.droplevel('Ticker')
-    data.columns.name = None
+    print(data.head())
     data['Daily Return'] = data['Adj Close'].pct_change()
     data['Volatility'] = data['Daily Return'].rolling(window=WINDOW_DAYS).std() * np.sqrt(252) * 100
     data.reset_index(inplace=True)
@@ -44,6 +41,7 @@ def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     data.dropna(inplace=True)
 
     # derived indicators
+    data['Stock Variance'] = data['Daily Return'].rolling(window=WINDOW_DAYS).var()
     data['Daily Variation'] = (data['High'] - data['Low']) / data['Open']
     data['7-Day SMA'] = data['Adj Close'].rolling(window=7).mean()
     data['7-Day STD'] = data['Adj Close'].rolling(window=7).std()
@@ -109,13 +107,10 @@ def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     columns_to_drop = ['+DM', '-DM', 'TR', 'Smoothed +DM', 'Smoothed -DM', 'Smoothed TR', 'DX']
     data.drop(columns=columns_to_drop, inplace=True)
     data.dropna(inplace=True)
-    data.reset_index(drop=True, inplace=True)
-    print(data.head())
     file_path = os.path.join(DATA_DIR_SAVE, f"{ticker}_volatility.csv")
     data.to_csv(file_path)
     print(f"Data saved to {file_path}")
     return data
-
 
 def plot_historical_volatility(ticker, start_date=None, end_date=None):
     data = load_ticker_data(ticker)
@@ -134,13 +129,10 @@ def plot_historical_volatility(ticker, start_date=None, end_date=None):
     plt.legend()
     plt.show()
 
-
 def download_data():
     for ticker in ALL_TICKERS:
         print(f"Starting ticker {ticker}")
         generate_ticker_dataset(ticker, START_DATE, END_DATE)
 
-
 if __name__ == '__main__':
     download_data()
-

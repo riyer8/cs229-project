@@ -1,0 +1,3 @@
+QCOM Polynomial Regression Info (Degree 2)
+R² Score: -0.460895704762742
+MSE: 200.3068844133929

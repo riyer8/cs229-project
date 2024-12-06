@@ -1,0 +1,3 @@
+UAL Linear Regression Info
+R² Score: -0.10297135016966652
+MSE: 272.445692249123

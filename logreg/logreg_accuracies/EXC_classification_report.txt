@@ -1,0 +1,11 @@
+EXC Logistic Regression Info
+Accuracy: 0.9938423645320197
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      0.99      1.00       569
+           1       0.98      1.00      0.99       243
+
+    accuracy                           0.99       812
+   macro avg       0.99      1.00      0.99       812
+weighted avg       0.99      0.99      0.99       812

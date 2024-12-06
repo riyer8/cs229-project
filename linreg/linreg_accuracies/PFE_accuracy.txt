@@ -1,0 +1,3 @@
+PFE Linear Regression Info
+R² Score: -0.5043592952362428
+MSE: 116.65189088765312

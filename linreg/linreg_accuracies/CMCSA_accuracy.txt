@@ -1,0 +1,3 @@
+CMCSA Linear Regression Info
+R² Score: -0.2290368505146554
+MSE: 81.60756294236937

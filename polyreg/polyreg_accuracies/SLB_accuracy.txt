@@ -1,0 +1,3 @@
+SLB Polynomial Regression Info (Degree 2)
+R² Score: -1.1495045018452474
+MSE: 330.8402445353221
