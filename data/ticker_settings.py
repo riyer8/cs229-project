@@ -4,70 +4,73 @@ ticker_settings.py
 Defines stock ticker constants
 """
 
+# Benchmarks and Indices
+BENCHMARKS_AND_INDICES = [
+    '^DJI',  # DOW JONES
+    'SPY',  # S&P 500 ETF
+    'QQQ',  # NASDAQ 100 ETF
+]
+
 # Technology Companies
 TECHNOLOGY_COMPANIES = [
-    'AMD', 'IBM', 'CRM', 'HPE', 'DELL', 'ADBE', 'AI', 'SHOP', 'TWLO', 'SPOT', 'Z',
-    'DDOG', 'PINS', 'AMZN', 'META', 'CSCO', 'ORCL', 'ANET', 'PANW', 'DLTR', 'HPQ',
-    'CRWD', 'MDB', 'GTLB', 'SQ', 'ZM', 'PYPL', 'RBLX', 'CFLT', 'ADSK', 'KEYS', 'NOW',
-    'SOFI', 'RIVN', 'QS', 'TEAM', 'ROKU', 'MNDY', 'GOOGL', 'MSFT', 'AAPL',
-    'INTC', 'BABA', 'PLTR', 'COST', 'SNOW', 'FSLY', 'TGTX', 'HUBS'
+    'AAPL', 'MSFT', 'NVDA', 'AMZN', 'META'
 ]
 
 # Semiconductor Companies
 SEMICONDUCTOR_COMPANIES = [
-    'NVDA', 'ASML', 'MU', 'AMAT', 'LRCX', 'AVGO', 'QCOM', 'ON', 'SMCI', 'CRUS',
-    'TXN', 'SWKS'
+    'NVDA', 'ASML', 'MU', 'AMAT', 'LRCX', 'AVGO', 'QCOM', 'TXN'
 ]
 
 # Consumer Discretionary Companies
 CONSUMER_DISCRETIONARY_COMPANIES = [
-    'TSLA', 'HD', 'NKE', 'MCD', 'DIS', 'LULU', 'ETSY', 'ULTA', 'CMG', 'TGT',
-    'BBY', 'MAR', 'RCL', 'LUV', 'PTON', 'GRWG'
+    'TSLA', 'HD', 'NKE', 'MCD', 'DIS'
 ]
 
 # Energy Companies
 ENERGY_COMPANIES = [
-    'XOM', 'CVX', 'COP', 'SLB', 'ENPH'
+    'XOM', 'CVX', 'COP', 'SLB'
 ]
 
 # Healthcare Companies
 HEALTHCARE_COMPANIES = [
-    'JNJ', 'PFE', 'MRNA', 'GILD', 'AMGN', 'ABBV'
+    'JNJ', 'PFE', 'AMGN', 'ABBV'
 ]
 
 # Financial Companies
 FINANCIAL_COMPANIES = [
-    'JPM', 'BAC', 'WFC', 'C', 'GS', 'V', 'MA', 'AXP', 'MS', 'BK'
+    'JPM', 'GS', 'V', 'MA'
 ]
 
 # Consumer Staples Companies
 CONSUMER_STAPLES_COMPANIES = [
-    'PG', 'KO', 'PEP', 'WMT', 'COST', 'CPB', 'MDLZ', 'SJM'
+    'PG', 'KO', 'PEP', 'WMT'
 ]
 
 # Communication Companies
 COMMUNICATION_COMPANIES = [
-    'T', 'VZ', 'TMUS', 'CMCSA', 'NFLX', 'TTD'
+    'T', 'VZ', 'CMCSA'
 ]
 
 # Utilities Companies
 UTILITIES_COMPANIES = [
-    'DUK', 'SO', 'EXC', 'AEP', 'NEE'
+    'DUK', 'SO', 'EXC'
 ]
 
 # Materials Companies
 MATERIALS_COMPANIES = [
-    'DOW', 'MLM', 'VMC', 'NEM', 'FCX'
+    'DOW', 'MLM', 'VMC', 'NEM'
 ]
 
 # Travel Companies
 TRAVEL_COMPANIES = [
-    'UAL', 'AAL', 'DAL', 'CCL', 'RCL', 'EXPE', 'BKNG'
+    'DAL', 'UAL', 'AAL', 'RCL'
 ]
 
-ALL_TICKERS = sorted(list(set((
-    SEMICONDUCTOR_COMPANIES + TECHNOLOGY_COMPANIES + CONSUMER_DISCRETIONARY_COMPANIES 
-    + ENERGY_COMPANIES + HEALTHCARE_COMPANIES + FINANCIAL_COMPANIES 
-    + CONSUMER_STAPLES_COMPANIES + COMMUNICATION_COMPANIES + UTILITIES_COMPANIES 
-    + MATERIALS_COMPANIES + TRAVEL_COMPANIES
-))))
+# Combine all tickers into a single list and remove duplicates
+ALL_TICKERS = sorted(list(set(
+    BENCHMARKS_AND_INDICES + TECHNOLOGY_COMPANIES + SEMICONDUCTOR_COMPANIES +
+    CONSUMER_DISCRETIONARY_COMPANIES + ENERGY_COMPANIES + HEALTHCARE_COMPANIES +
+    FINANCIAL_COMPANIES + CONSUMER_STAPLES_COMPANIES + COMMUNICATION_COMPANIES +
+    UTILITIES_COMPANIES + MATERIALS_COMPANIES + TRAVEL_COMPANIES
+)))
+

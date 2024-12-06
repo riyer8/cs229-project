@@ -14,8 +14,6 @@ import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
 from ticker_settings import ALL_TICKERS
-# from historical_info import get_dividend_price_ratio, get_earnings_price_ratio, \
-    # get_book_to_market_ratio, get_stock_variance, get_treasury_bill_rate
 
 # Constants
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S%z"
@@ -37,7 +35,8 @@ def load_ticker_data(ticker) -> pd.DataFrame:
 
 def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     data = yf.download(ticker, start=start_date, end=end_date)
-    print(data.head())
+    data.columns = data.columns.droplevel('Ticker')
+    data.columns.name = None
     data['Daily Return'] = data['Adj Close'].pct_change()
     data['Volatility'] = data['Daily Return'].rolling(window=WINDOW_DAYS).std() * np.sqrt(252) * 100
     data.reset_index(inplace=True)
@@ -45,7 +44,6 @@ def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     data.dropna(inplace=True)
 
     # derived indicators
-    data['Stock Variance'] = data['Daily Return'].rolling(window=WINDOW_DAYS).var()
     data['Daily Variation'] = (data['High'] - data['Low']) / data['Open']
     data['7-Day SMA'] = data['Adj Close'].rolling(window=7).mean()
     data['7-Day STD'] = data['Adj Close'].rolling(window=7).std()
@@ -111,6 +109,8 @@ def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     columns_to_drop = ['+DM', '-DM', 'TR', 'Smoothed +DM', 'Smoothed -DM', 'Smoothed TR', 'DX']
     data.drop(columns=columns_to_drop, inplace=True)
     data.dropna(inplace=True)
+    data.reset_index(drop=True, inplace=True)
+    print(data.head())
     file_path = os.path.join(DATA_DIR_SAVE, f"{ticker}_volatility.csv")
     data.to_csv(file_path)
     print(f"Data saved to {file_path}")
@@ -143,3 +143,4 @@ def download_data():
 
 if __name__ == '__main__':
     download_data()
+
