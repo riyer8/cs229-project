@@ -12,3 +12,5 @@ dependencies:
   - yfinance
   - pytorch
   - seaborn
+  - pip:
+      - pandas_datareader

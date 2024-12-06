@@ -9,7 +9,7 @@ TECHNOLOGY_COMPANIES = [
     'AMD', 'IBM', 'CRM', 'HPE', 'DELL', 'ADBE', 'AI', 'SHOP', 'TWLO', 'SPOT', 'Z',
     'DDOG', 'PINS', 'AMZN', 'META', 'CSCO', 'ORCL', 'ANET', 'PANW', 'DLTR', 'HPQ',
     'CRWD', 'MDB', 'GTLB', 'SQ', 'ZM', 'PYPL', 'RBLX', 'CFLT', 'ADSK', 'KEYS', 'NOW',
-    'SOFI', 'RIVN', 'QS', 'TEAM', 'ROKU', 'AFRM', 'MNDY', 'GOOGL', 'MSFT', 'AAPL',
+    'SOFI', 'RIVN', 'QS', 'TEAM', 'ROKU', 'MNDY', 'GOOGL', 'MSFT', 'AAPL',
     'INTC', 'BABA', 'PLTR', 'COST', 'SNOW', 'FSLY', 'TGTX', 'HUBS'
 ]
 
