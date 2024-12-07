@@ -1,0 +1,3 @@
+QCOM Linear Regression Info
+R² Score: -0.5855869222400103
+MSE: 217.40384767047348

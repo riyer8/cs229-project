@@ -1,0 +1,11 @@
+JPM Logistic Regression Info
+Accuracy: 0.9950738916256158
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      0.99      1.00       528
+           1       0.99      1.00      0.99       284
+
+    accuracy                           1.00       812
+   macro avg       0.99      1.00      0.99       812
+weighted avg       1.00      1.00      1.00       812

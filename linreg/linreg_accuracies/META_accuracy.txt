@@ -1,0 +1,3 @@
+META Linear Regression Info
+R² Score: -0.30467066809937515
+MSE: 567.9461851423083

@@ -1,0 +1,3 @@
+MCD Linear Regression Info
+R² Score: -0.02813568163673774
+MSE: 20.318074944690736

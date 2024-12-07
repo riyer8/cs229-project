@@ -1,0 +1,3 @@
+DIS Linear Regression Info
+R² Score: -0.7750940373869453
+MSE: 192.61981503254867

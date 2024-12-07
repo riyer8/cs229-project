@@ -1,0 +1,3 @@
+AMAT Linear Regression Info
+R² Score: -0.6596014190333215
+MSE: 223.72326921182562

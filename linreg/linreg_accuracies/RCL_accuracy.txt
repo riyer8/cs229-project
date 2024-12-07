@@ -1,0 +1,3 @@
+RCL Linear Regression Info
+R² Score: -0.47450946248876535
+MSE: 694.3289742948767

@@ -1,0 +1,3 @@
+MU Polynomial Regression Info (Degree 2)
+R² Score: -0.04470225273874484
+MSE: 123.26627609476913

@@ -1,0 +1,3 @@
+DOW Polynomial Regression Info (Degree 2)
+R² Score: -2.7200101738868687
+MSE: 153.89324728663868

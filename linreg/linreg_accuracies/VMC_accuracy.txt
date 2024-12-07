@@ -1,0 +1,3 @@
+VMC Linear Regression Info
+R² Score: -0.034395076981891926
+MSE: 66.14067204420043

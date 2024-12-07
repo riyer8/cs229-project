@@ -1,0 +1,3 @@
+TSLA Linear Regression Info
+R² Score: -0.13521279964121846
+MSE: 305.76731064633964
