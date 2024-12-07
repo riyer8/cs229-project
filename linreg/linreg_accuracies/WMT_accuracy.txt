@@ -1,0 +1,3 @@
+WMT Linear Regression Info
+R² Score: -0.013683980456445699
+MSE: 66.34955063081999

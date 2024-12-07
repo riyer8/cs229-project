@@ -1,0 +1,3 @@
+DOW Linear Regression Info
+R² Score: -3.55826387189682
+MSE: 188.57215156796147

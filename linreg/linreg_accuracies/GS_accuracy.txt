@@ -1,0 +1,3 @@
+GS Linear Regression Info
+R² Score: -0.10547289392397974
+MSE: 35.141008678087196

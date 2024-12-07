@@ -1,0 +1,3 @@
+NVDA Linear Regression Info
+R² Score: -0.6040206863489159
+MSE: 426.12760276751357

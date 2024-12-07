@@ -1,0 +1,3 @@
+AAPL Linear Regression Info
+R² Score: -0.058095863948980586
+MSE: 91.19710531166383

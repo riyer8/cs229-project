@@ -1,0 +1,11 @@
+JNJ Logistic Regression Info
+Accuracy: 0.9987684729064039
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00       576
+           1       1.00      1.00      1.00       236
+
+    accuracy                           1.00       812
+   macro avg       1.00      1.00      1.00       812
+weighted avg       1.00      1.00      1.00       812

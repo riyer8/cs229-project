@@ -1,0 +1,16 @@
+name: cs229-stockvol
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - matplotlib
+  - numpy
+  - pip
+  - python=3.9
+  - scikit-learn
+  - scipy
+  - yfinance
+  - pytorch
+  - seaborn
+  - pip:
+      - pandas_datareader

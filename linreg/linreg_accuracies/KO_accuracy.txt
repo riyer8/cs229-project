@@ -1,0 +1,3 @@
+KO Linear Regression Info
+R² Score: -0.004974944445298224
+MSE: 34.74196978086222

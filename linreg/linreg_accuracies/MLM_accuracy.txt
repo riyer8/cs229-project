@@ -1,0 +1,3 @@
+MLM Linear Regression Info
+R² Score: -0.0059948822040707395
+MSE: 61.248344428701294

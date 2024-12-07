@@ -1,0 +1,3 @@
+SLB Linear Regression Info
+R² Score: -1.2807961585011216
+MSE: 351.04817321082805
