@@ -1,0 +1,12 @@
+Feature Set,MSE,MAE,R-squared,Correlation Coefficient,Explained Variance
+['Daily Return'],14.352704,2.6319027,0.6654212474822998,0.8268495586610217,0.679876983165741
+"['Daily Return', 'High-Close', 'Low-Open']",13.463685,2.522636,0.6861453056335449,0.831500837072312,0.6875869035720825
+"['Daily Return', 'High-Close', 'Low-Open', 'Close Change']",12.796624,2.755169,0.7016953229904175,0.8559871212620258,0.7231699228286743
+"['Daily Return', 'High-Close', 'Low-Open', 'ADX', 'RSI', 'Daily Variation']",21.531425,2.8474965,0.4980766773223877,0.7607358976012489,0.5059658885002136
+"['Daily Return', 'High-Close', 'Low-Open', 'ADX', 'RSI', 'Daily Variation', 'Stochastic Oscillator']",15.827493,2.9369848,0.6310421228408813,0.8185537326507175,0.6621353626251221
+"['Daily Return', 'Volume', 'Daily Variation', 'ADX', '7-Day STD', 'Stochastic Oscillator', 'RSI', 'Low-Open', 'Close % Change', 'High-Close', 'Close Change']",36.77137,4.319435,0.14281529188156128,0.7742391927930434,0.41155797243118286
+"['MACD', 'Close Change', 'RSI', 'Stochastic Oscillator', 'ADX']",118.968636,8.275082,-1.773301601409912,0.7177383754582226,-0.4572697877883911
+"['Daily Return', 'High-Close', 'Low-Open', 'ADX', 'RSI', 'Daily Variation']",21.290215,3.1468298,0.503699541091919,0.7493407041964131,0.5161434412002563
+"['+DI', 'ATR', 'MACD', '-DI', '14-Day EMA']",51.1429,6.369482,-0.19220221042633057,0.5840742422982128,0.34010064601898193
+"['+DI', 'ATR', 'MACD', '-DI', '14-Day EMA', 'Daily Return']",62.598713,7.057547,-0.4592510461807251,0.6481668821040024,0.41704946756362915
+"['Adj Close', 'Close', 'High', 'Low', 'Open', 'Volume', 'Daily Return', 'Volatility', 'Daily Variation', '7-Day SMA', '7-Day STD', 'SMA + 2STD', 'SMA - 2STD', 'High-Close', 'Low-Open', 'Cumulative Return', '14-Day EMA', 'Close % Change', 'Close Change', 'RSI', 'MACD', 'Stochastic Oscillator', 'ATR', '+DI', '-DI', 'ADX']",156.12762,11.509158,-2.639522075653076,0.45391179339741516,0.12157726287841797
