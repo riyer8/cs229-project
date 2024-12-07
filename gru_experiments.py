@@ -25,7 +25,7 @@ ticker = "^DJI"
 data = vol_loader.load_ticker_data(ticker)
 
 def feature_tuning():
-    filename = "gru_features.csv"
+    filename = "data/gru_features.csv"
     best_feature_combo = None
     best_metric_value = float('inf')  # Initialize for minimum metric (e.g., MSE)
     with open(filename, mode='w', newline='') as file:
@@ -56,7 +56,7 @@ def feature_tuning():
 
 best_feature = ['Daily Return', 'High-Close', 'Low-Open']
 def hidden_size_tuning():
-    filename = "lstm_hidden_tuning.csv"
+    filename = "data/lstm_hidden_tuning.csv"
     best_hidden_dim = None
     best_metric_value = float('inf')  # Initialize for minimum metric (e.g., MAE)
 
