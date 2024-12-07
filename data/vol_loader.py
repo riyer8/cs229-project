@@ -13,7 +13,7 @@ import pandas as pd
 import yfinance as yf
 import numpy as np
 import matplotlib.pyplot as plt
-from ticker_settings import ALL_TICKERS
+from data.ticker_settings import ALL_TICKERS
 
 # Constants
 DATE_FORMAT = "%Y-%m-%d %H:%M:%S%z"
