@@ -102,3 +102,5 @@ Our results emphasize the importance of qualitative data, such as sentiment, in 
 - **Reuters** and **Bloomberg** for access to historical financial news data
 
 ## Made in Stanford CS 229 (Machine Learning)
+
+![alt text](CS_229_Poster.png "Title")
