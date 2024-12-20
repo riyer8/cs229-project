@@ -23,7 +23,6 @@ END_DATE = '2020-12-31'
 DATA_DIR_LOAD = "data/datasets"  # full path when reading from outside directory
 DATA_DIR_SAVE = "datasets"
 
-
 def load_ticker_data(ticker) -> pd.DataFrame:
     file_path = os.path.join(DATA_DIR_LOAD, f"{ticker}_volatility.csv")
     if not os.path.exists(file_path):
@@ -31,7 +30,6 @@ def load_ticker_data(ticker) -> pd.DataFrame:
     data = pd.read_csv(file_path, index_col=0, parse_dates=True)
     print(f"Data for {ticker} loaded from {file_path}")
     return data
-
 
 def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     data = yf.download(ticker, start=start_date, end=end_date)
@@ -116,7 +114,6 @@ def generate_ticker_dataset(ticker, start_date, end_date) -> None:
     print(f"Data saved to {file_path}")
     return data
 
-
 def plot_historical_volatility(ticker, start_date=None, end_date=None):
     data = load_ticker_data(ticker)
     if start_date or end_date:
@@ -134,13 +131,10 @@ def plot_historical_volatility(ticker, start_date=None, end_date=None):
     plt.legend()
     plt.show()
 
-
 def download_data():
     for ticker in ALL_TICKERS:
         print(f"Starting ticker {ticker}")
         generate_ticker_dataset(ticker, START_DATE, END_DATE)
 
-
 if __name__ == '__main__':
     download_data()
-

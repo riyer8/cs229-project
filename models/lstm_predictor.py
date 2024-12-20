@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
 HORIZON = 14
+
 class LSTMVolatilityPredictor:
     def __init__(self, sequence_length=30, batch_size=16, epochs=20, hidden_dim=50, learning_rate=0.001, device=None):
         self.sequence_length = sequence_length
@@ -200,5 +201,3 @@ class LSTMVolatilityPredictor:
             plt.savefig(save_path, format='png', dpi=300, bbox_inches='tight')
             print(f"Prediction plot saved to {save_path}")
         plt.show()
-
-

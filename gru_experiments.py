@@ -110,5 +110,4 @@ def run_test():
     predictor.plot_loss()
     predictor.plot_predictions(dates_test, y_true_test, y_pred_test)
 
-
 run_test()

@@ -1,5 +1,4 @@
 import csv
-
 from models.lstm_predictor import LSTMVolatilityPredictor
 from data import vol_loader
 
@@ -112,6 +111,5 @@ def run_test():
     dates_test, y_true_test, y_pred_test, metrics_test = predictor.evaluate(val_loader, y_val_seq, dates_val_seq)
     predictor.plot_loss()
     predictor.plot_predictions(dates_test, y_true_test, y_pred_test)
-
 
 run_test()
